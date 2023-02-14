@@ -23,7 +23,7 @@ app.use(expressLayouts)
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
   res.render('signup/login', {
     title: 'Login',
     layout: 'layout/modal-layout',
