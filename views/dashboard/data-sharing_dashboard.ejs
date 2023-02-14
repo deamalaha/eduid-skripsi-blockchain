@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <aside>
+        <div class="w-64 h-full shadow-md bg-primary-900 absolute text-white" id="sidenavSecExample">
+            <div class="pt-8 pb-6 px-6">
+                <div class="flex items-center">
+                    <div class="shrink-0">
+                    <img src="/assets/Logomark.png" class="rounded-full w-10" alt="Logomark">
+                    </div>
+                    <div class="grow ml-3">
+                    <p class="text-text_lg font-semibold text-white">Untitled UI
+                    </p>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="relative px-4">
+                <div class="flex justify-center">
+                    <div class="mb-3 xl:w-52">
+                    <div class="input-group relative flex flex-wrap items-stretch w-full mb-4 rounded-lg">
+                        <input type="search" class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-text-base bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:bg-white focus:border-primary-600 focus:outline-none" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                    </div>
+                    </div>
+                </div>
+                <div class="">
+                    <ul class="relative">
+                        <li class="relative">
+                            <a class="flex items-center text-sm py-4 px-6 h-16  text-white text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-primary-700 transition duration-300 ease-in-out" href="/main/<%= admin._id %>" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                                <img src="/assets/home.png" class="mr-3" alt="">
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="relative">
+                            <a class="flex items-center text-sm py-4 px-6 h-16  text-white text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-primary-700 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark" href="/kurikulum/<%= admin._id %>">
+                                <img src="/assets/3-layers.png" class="mr-3" alt="">
+                                <span>Kurikulum</span>
+                            </a>
+                        </li>
+                        <li class="relative">
+                            <a class="flex items-center text-sm py-4 px-6 h-16  text-white text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-primary-700 transition duration-300 ease-in-out" href="/siswa/<%= admin._id %>" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                                <img src="/assets/check-square.png" class="mr-3" alt="">
+                                <span>Nilai Siswa</span>
+                            </a>
+                        </li>
+                        <li class="relative">
+                            <a class="flex items-center text-sm py-4 px-6 h-16  text-white text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-primary-700 transition duration-300 ease-in-out" href="/data_sharing/<%= admin._id %>" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                                <img src="/assets/cloud.png" class="mr-3" alt="">
+                                <span>Data Sharing</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
+            <div class="text-center bottom-0 absolute w-full">
+                <div class="px-4">
+                    <a class="flex items-center text-sm py-4 px-6 h-16  text-white text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-primary-700 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                    <img src="/assets/settings.png" class="mr-3" alt="">
+                    <span>Settings</span>
+                    </a>
+                </div>
+                <div>
+                    <div class="flex items-center px-6 before:flex-1 before:border-t before:border-gray-500 before:mt-0.5 after:flex-1 after:border-t after:border-gray-500 after:mt-0.5"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-64 overflow-y-scroll max-h-screen">
+        <div class="pt-12 pl-9 flex">
+            <div>
+                <h1 class="text-display_sm font-medium">Data Sharing</h1>
+                <p class="text-text_md font-regular text-gray-500">Berbagi data siswa dengan aman menggunakan blockchain</p>
+            </div>
+        </div>
+
+        <div class="pt-5 pl-9 flex">
+            <div class="mb-3 mr-5">
+                <label for="nama_siswa" class="block text-text_sm font-medium">Cari NISN</label>
+                <input type="text" placeholder="Input NISN" name="nisn" id="nisn" class="h-11 w-96 rounded-lg ring-gray-300 focus:ring-primary-600" required>
+            </div>
+            <div class="mb-3 px-5 pt-4">
+                <div onclick="conn()">
+                    <a class="bg-primary-600 text-white text-text_md rounded-lg text-center inline-flex items-center px-5 py-3">Cari Data</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-start pl-9 pt-5">
+            <div class="p-5 w-72  mr-14 border border-gray-200 shadow-md rounded-lg student-data">
+       
+            </div>
+            <div class="pr-14 pb-10 w-full">
+                <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <caption class="p-5 font-semibold text-text-base bg-white">
+                            <div class="flex items-center">
+                                <h1 class="text-left flex-1">Daftar Nilai</h1>
+    
+                            </div>
+                        </caption>
+                        <thead class="text-text_sm font-medium text-gray-500 bg-gray-50">
+                            <tr>
+                                <th scope="col" class="py-3 px-6">
+                                    Mata Pelajaran
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Nilai
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Date Uploaded
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="nilai-table">
+                            <tr class="bg-white border-b ">
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        let blockchainData = []
+        const nilaiTable = document.querySelector('.nilai-table')
+        const studentData = document.querySelector('.student-data')
+
+        function getTimestamp(timestamp) {
+            const date = new Date(timestamp * 1000);
+
+            return date
+        }
+
+        window.addEventListener('load', async () => {
+            if (window.ethereum) {
+                window.web3 = new Web3(ethereum);
+                try {
+                    await ethereum.enable();
+                } catch (error) {
+                // User denied account access...
+                }
+            }
+            // Legacy dapp browsers...
+            else if (window.web3) {
+                window.web3 = new Web3(web3.currentProvider);
+                // Acccounts always exposed
+                // web3.eth.sendTransaction({/* ... */});
+            }
+            // Non-dapp browsers...
+            else {
+                alert("please install Non-Ethereum browser detected. You should consider trying MetaMask!")
+            }
+        })
+    
+        function add(){
+            console.log("add in blockchain");
+        }
+    
+        async function conn(){
+            var accounts = await window.web3.eth.getAccounts();
+            console.log("account is " ,accounts[0]);
+    
+            var abi = [{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"_getstudentgrade","outputs":[{"internalType":"string","name":"subject","type":"string"},{"internalType":"string","name":"student_grade","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"_student","outputs":[{"internalType":"string","name":"student_name","type":"string"},{"internalType":"uint256","name":"student_identification","type":"uint256"},{"internalType":"string","name":"class","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_subject","type":"string"},{"internalType":"string","name":"grade","type":"string"}],"name":"addGrade","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_class","type":"string"}],"name":"addStudent","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"}],"name":"getAllGrade","outputs":[{"components":[{"internalType":"string","name":"student_name","type":"string"},{"internalType":"uint256","name":"student_identification","type":"uint256"},{"internalType":"string","name":"class","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"internalType":"struct EduID.Student","name":"","type":"tuple"},{"components":[{"internalType":"string","name":"subject","type":"string"},{"internalType":"string","name":"student_grade","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"internalType":"struct EduID.Grades[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"}]
+            
+            var contract_address= '0xaE520C9D1b042AAC1045304a4566B586bABc2FEd'; 
+    
+            var instance = new web3.eth.Contract(
+                abi,
+                contract_address
+            );
+    
+            var nisn = document.getElementById("nisn").value;
+
+            await instance.methods.getAllGrade(nisn)
+                .call()
+                .then((res) => {
+                    nilaiTable.innerHTML = ''
+                    studentData.innerHTML = ''
+                    res[1].forEach((nilai) => {
+                        nilaiTable.innerHTML += 
+                                `<tr class="bg-white border-b ">
+                                    <th scope="row" class="py-7 px-8 font-medium text-text-base whitespace-nowrap">
+                                        ${nilai[0]}
+                                    </th>
+                                    <td class="py-7 px-8 ">
+                                        ${nilai[1]} 
+                                    </td>
+                                    <td class="py-7 px-8 ">
+                                        ${getTimestamp(nilai[2])}
+                                    </td>
+                                </tr>`
+                    })
+                    console.log(res[0])
+                    studentData.innerHTML += 
+                        `<div class="pb-5">
+                        <h1 class="text-text_lg font-medium">Nama Siswa</h1>
+                        <p class="text-text_md font-regular">${res[0][0]}</p>
+                        </div>
+                        <div class="pb-5">
+                        <h1 class="text-text_lg font-medium">NISN</h1>
+                        <p class="text-text_md font-regular">${res[0][1]}</p>
+                        </div>
+                        <div class="pb-5">
+                        <h1 class="text-text_lg font-medium">Kelas</h1>
+                        <p class="text-text_md font-regular">${res[0][2]}</p>
+                        </div>`
+                })
+        }
+    </script>
+</body>
+</html>

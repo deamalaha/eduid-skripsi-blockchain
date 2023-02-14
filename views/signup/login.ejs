@@ -1,0 +1,41 @@
+<section class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-primary-100 py-6 sm:py-12">
+    <div class="relative bg-white p-28 pl-28 pr-28 shadow-xl ring-1 ring-gray-200 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-20">
+        <div class="">
+            <h1 class="text-display_md font-semibold">
+                Selamat Datang
+            </h1>
+            <p class="text-text_md font-medium mt-4 text-gray-500">
+                Silakan masuk menggunakan akun anda
+            </p>
+        </div>
+
+        <div class="container pt-11">
+            <form action="/login" method="post">
+                <div class="">
+                        <div>
+                            <label for="email"><b class="text-text_sm font-medium">Email</b></label>
+                            <input type="email" placeholder="Masukkan email" name="email" class="h-11 w-96 rounded-lg ring-gray-300 focus:ring-primary-600" required>
+                        </div>
+                        <div class="pt-5">
+                            <label for="psw"><b class="text-text_sm font-medium ">Password</b></label>
+                            <input type="password" placeholder="Masukkan password" name="password" class="h-11 w-96 rounded-lg focus:ring-primary-600" required>
+                        </div>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="/main">
+                            <button type="submit" class="h-11 w-96 bg-primary-600 inline-block text-text_md font-semibold ring-1 ring-primary-600 rounded-lg text-white hover:bg-primary-700">Masuk</button>
+                        </a>
+                    </div>
+
+                    <div class="p-7 w-96"><hr></div>
+
+                    <div class="text-center">
+                        <span class="text-text_md font-medium text-gray-500">Belum punya akun? 
+                        <a href="/signup" class="text-text_md font-semibold text-text-base">Daftar di sini</a></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

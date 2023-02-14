@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form action="/siswa/tambahNilai" method="post">
+        <input type="hidden" name="adminId" value="<%= admin._id %>"/>
+        <input type="hidden" name="siswaId" value="<%= siswa._id %>"/>
+        <input type="hidden" name="kelasId" value="<%= dataKelas._id %>"/>
+        <input type="hidden" name="matpelId" value="<%= selectedMatPel._id %>"/>
+        <div class="pt-5 px-9">
+            <div class="border border-gray-300 rounded-lg px-9 py-7">
+                <div class="mb-3 mr-5 pb-4">
+                    <h1 class="text-text_lg font-medium">Tambah Nilai Siswa</h1>
+                </div>
+                <div class="mb-3 mr-5">
+                    <label for="nama_siswa" class="block text-text_sm font-medium">Nama Siswa</label>
+                    <input type="text" placeholder="Input nama siswa" name="namaSiswa" id="namaSiswa" class="h-11 w-96 rounded-lg ring-gray-200 focus:ring-primary-600 bg-gray-100" value="<%= siswa.namaSiswa %>" disabled>
+                </div>
+                <div class="mb-3 mr-5 pt-5">
+                    <label for="NISN" class="block text-text_sm font-medium">NISN</label>
+                    <input type="text" placeholder="Input NISN siswa" name="nisn" id="nisn" class="h-11 w-96 rounded-lg ring-gray-200 focus:ring-primary-600 bg-gray-100" value="<%= siswa.nisn %>" disabled>
+                </div>
+                <div class="mb-3 mr-5 pt-5">
+                    <label for="NISN" class="block text-text_sm font-medium">Mata Pelajaran</label>
+                    <input type="text" placeholder="Input NISN siswa" name="nisn" id="mataPelajaran" class="h-11 w-96 rounded-lg ring-gray-200 focus:ring-primary-600 bg-gray-100" value="<%= selectedMatPel.namaMataPelajaran %>" disabled>
+                </div>
+                <div class="mb-3 mr-5 pt-5">
+                    <label for="nilai" class="block text-text_sm font-medium">Nilai</label>
+                    <input type="text" placeholder="Input nilai siswa" name="nilai" id="nilai" class="h-11 w-96 rounded-lg ring-gray-300 focus:ring-primary-600" required>
+                </div>
+                <div onclick=" conn() " >
+                    <a class="bg-primary-600 text-white text-text_md rounded-lg text-center inline-flex items-center px-5 py-3">Simpan di Blockchain</a>
+                </div>
+                <div id="second"  class="pt-5 px-9 flex justify-end">
+                    <button type="submit" class="bg-primary-600 text-white text-text_md rounded-lg text-center inline-flex items-center px-5 py-3">Tambah Nilai</button>                
+                </div>
+            </div>
+        </div>
+    </form>
+<script>
+    window.addEventListener('load', async () => {
+        console.log("hi");
+        if (window.ethereum) {
+            console.log("hii");
+            window.web3 = new Web3(ethereum);
+            try {
+                await ethereum.enable();
+            } catch (error) {
+            // User denied account access...
+            }
+        }
+        // Legacy dapp browsers...
+        else if (window.web3) {
+            window.web3 = new Web3(web3.currentProvider);
+            // Acccounts always exposed
+            // web3.eth.sendTransaction({/* ... */});
+        }
+        // Non-dapp browsers...
+        else {
+            alert("please install metamask")
+            console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        }
+    })
+
+    function add(){
+        console.log("add in blockchain")
+    }
+
+    async function conn() {
+        // window.web3 = new Web3(ethereum);
+        // await ethereum.enable();
+        
+        var accounts = await window.web3.eth.getAccounts();
+        console.log("account is " ,accounts[0]);
+
+        var abi = [{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"_getstudentgrade","outputs":[{"internalType":"string","name":"subject","type":"string"},{"internalType":"string","name":"student_grade","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"_student","outputs":[{"internalType":"string","name":"student_name","type":"string"},{"internalType":"uint256","name":"student_identification","type":"uint256"},{"internalType":"string","name":"class","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_subject","type":"string"},{"internalType":"string","name":"grade","type":"string"}],"name":"addGrade","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_class","type":"string"}],"name":"addStudent","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"}],"name":"getAllGrade","outputs":[{"components":[{"internalType":"string","name":"student_name","type":"string"},{"internalType":"uint256","name":"student_identification","type":"uint256"},{"internalType":"string","name":"class","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"internalType":"struct EduID.Student","name":"","type":"tuple"},{"components":[{"internalType":"string","name":"subject","type":"string"},{"internalType":"string","name":"student_grade","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"internalType":"struct EduID.Grades[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"}]
+
+        var contract_address= '0xaE520C9D1b042AAC1045304a4566B586bABc2FEd'; 
+
+        var instance = new web3.eth.Contract(
+            abi,
+            contract_address
+        );
+        var id = document.getElementById("nisn").value; 
+        var subject = document.getElementById("mataPelajaran").value;
+        var score = document.getElementById("nilai").value;  
+    
+        await instance.methods.addGrade( id, subject, score)
+            .send({from: accounts[0]})
+            .then(()=>{
+                document.getElementById('second').onclick = add() })     
+    }
+</script>   
+</body>
+</html>
