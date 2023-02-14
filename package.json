@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "build": "npx tailwindcss -i ./src/css/input.css -o ./public/css/style.css --watch"
   },
