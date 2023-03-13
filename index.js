@@ -1,7 +1,5 @@
 const express = require('express')
 const app = express()
-const mongoose = require('mongoose')
-const web3 = require('web3');
 var methodOverride = require('method-override')
 var expressLayouts = require('express-ejs-layouts')
 const { body, validationResult, check } = require('express-validator')
@@ -250,8 +248,6 @@ app.get('/siswa/:adminId/tambah_siswa/:kelasId', async (req, res) => {
 // Tambah Siswa Function
 app.post('/siswa/tambah_siswa', body(), async (req, res) => {
   const dataKelas = await DataKelas.findOne({ _id: req.body.kelasId })
-  var a = [{namaSiswa:'aa' ,nisn :'vv' }, {namaSiswa:'aa' ,nisn :'vv' } , {namaSiswa:'aa' ,nisn :'vv' }]
-  
   const { namaSiswa, nisn } = req.body
   
   const newSiswa = await Siswa.create({
@@ -271,14 +267,12 @@ app.post('/siswa/tambah_siswa', body(), async (req, res) => {
 app.get('/siswa/:adminId/:kelasId', async (req, res) => {
   const admin = await Admins.findOne({_id: req.params.adminId})
   const dataKelas = await DataKelas.findOne({ _id : req.params.kelasId}).populate('siswa jurusan')
-  var a = [{namaSiswa:'aa' ,nisn :'vv' }, {namaSiswa:'aa' ,nisn :'vv' } , {namaSiswa:'aa' ,nisn :'vv' }]
 
   res.render('add/tambah_siswa', {
     title: 'Siswa Dashboard - Tambah Siswa',
     layout: 'layout/main-layout',
     dataKelas,
     admin,
-    a,
     moment
   })
   
