@@ -47,6 +47,9 @@
         </div>
     </form> 
     <script>
+
+        // initiate connection to metamask
+        // checking if browser already installed metamask
         window.addEventListener('load', async () => {
             console.log("hi");
             if (window.ethereum) {
@@ -74,18 +77,20 @@
         function add(){
             console.log("add in blockchain")
         }
-    
+        
         async function conn() {
-            // window.web3 = new Web3(ethereum);
-            // await ethereum.enable();
             
+            //get user metamask account
             var accounts = await window.web3.eth.getAccounts();
             console.log("account is " ,accounts[0]);
-    
+            
+            // abi of the smart contract
             var abi = [{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"_getstudentgrade","outputs":[{"internalType":"string","name":"subject","type":"string"},{"internalType":"string","name":"student_grade","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"_student","outputs":[{"internalType":"string","name":"student_name","type":"string"},{"internalType":"uint256","name":"student_identification","type":"uint256"},{"internalType":"string","name":"class","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_subject","type":"string"},{"internalType":"string","name":"grade","type":"string"}],"name":"addGrade","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_class","type":"string"}],"name":"addStudent","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"}],"name":"getAllGrade","outputs":[{"components":[{"internalType":"string","name":"student_name","type":"string"},{"internalType":"uint256","name":"student_identification","type":"uint256"},{"internalType":"string","name":"class","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"internalType":"struct EduID.Student","name":"","type":"tuple"},{"components":[{"internalType":"string","name":"subject","type":"string"},{"internalType":"string","name":"student_grade","type":"string"},{"internalType":"uint256","name":"timeStamp","type":"uint256"}],"internalType":"struct EduID.Grades[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"}]
-    
+            
+
+            // smart contract blockchain address
             var contract_address= '0xaE520C9D1b042AAC1045304a4566B586bABc2FEd'; 
-    
+            
             var instance = new web3.eth.Contract(
                 abi,
                 contract_address
@@ -93,7 +98,9 @@
             var id = document.getElementById("nisn").value; 
             var subject = document.getElementById("mataPelajaran").value;
             var score = document.getElementById("nilai").value;  
-        
+            
+
+            // sent instance to blockchain as transactions
             await instance.methods.addGrade( id, subject, score)
                 .send({from: accounts[0]})
                 .then(()=>{
